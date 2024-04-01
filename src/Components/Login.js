@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-const Login = (props) => {
+const Login = () => {
   //   return <div>Login</div>;
   return (
     <Container>
@@ -13,8 +12,16 @@ const Login = (props) => {
 const Container = styled.section`
   overflow: hidden;
   display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 100vh;
 `;
 
-const Content = styled.dive``;
+const Content = styled.div`
+  margin-bottom: 10vw;
+  width: 100%;
+  position: relative;
+  min-height: relative;
+`;
 
 export default Login;
