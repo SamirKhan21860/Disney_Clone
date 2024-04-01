@@ -4,7 +4,12 @@ const Login = () => {
   //   return <div>Login</div>;
   return (
     <Container>
-      <Content>Content</Content>
+      <Content>
+        <CTA>
+          <CTALogoOne src="/images/cta-logo-two.png" alt="" />
+        </CTA>
+        <BgImage />
+      </Content>
     </Container>
   );
 };
@@ -30,5 +35,28 @@ const Content = styled.div`
   padding: 80px 40px;
   height: 100%;
 `;
+
+const BgImage = styled.div`
+  height: 100%;
+  background-position: top;
+  background-size: cover;
+  background-image: url("/images/login-background.jpg");
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: -1;
+`;
+
+const CTA = styled.div`
+
+`
+
+const CTALogoOne = styled.img`
+  margin-bottom: 12px;
+  max-width: 600px;
+  min-height: 1px;
+  display: block;
+  width: 100%;
+`
 
 export default Login;
