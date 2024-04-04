@@ -5,8 +5,8 @@ const Header = (props) => {
   const handleAuth = () => {
     auth
       .singInWithPopup(provider)
-      .then((res) => {
-        console.log(res);
+      .then((result) => {
+        console.log(result);
       })
       .catch((error) => {
         alert(error.message);
@@ -45,7 +45,7 @@ const Header = (props) => {
             <span>Series</span>
           </a>
         </NavMenu>
-        <Letin onClick={handleAuth}>Letin</Letin>
+        <Login onClick={handleAuth}>Login</Login>
       </Nav>
     </>
   );
@@ -145,7 +145,7 @@ const NavMenu = styled.div`
   }
 `;
 
-const Letin = styled.a`
+const Login = styled.a`
   background-color: rgba(0, 0, 0, 0.6);
   padding: 8px 16px;
   text-transform: uppercase;
