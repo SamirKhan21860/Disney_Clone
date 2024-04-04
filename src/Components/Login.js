@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const Login = () => {
-  //   return <div>Login</div>;
   return (
     <Container>
       <Content>
@@ -9,9 +8,9 @@ const Login = () => {
           <CTALogoOne src="/images/cta-logo-one.svg" alt="" />
           <SignUp>GET ALL THERE</SignUp>
           <Description>
-            Get Premier Access To Raya and the Last Dragon for an additional free with a Disney+
-            subscription. As of 03/26/21, the price of Disney+ and The Disney Bundle will increase by
-            $1.
+            Get Premier Access To Raya and the Last Dragon for an additional
+            free with a Disney+ subscription. As of 03/26/21, the price of
+            Disney+ and The Disney Bundle will increase by $1.
           </Description>
           <CTALogoTwo src="/images/cta-logo-two.png" alt="" />
         </CTA>
@@ -99,6 +98,6 @@ const CTALogoTwo = styled.img`
   display: inline-block;
   vertical-align: bottom;
   width: 100%;
-`
+`;
 
 export default Login;
