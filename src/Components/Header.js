@@ -1,17 +1,13 @@
 import styled from "styled-components";
-import { auth, provider } from "../firebase";
+// import { auth, provider } from "../firebase";
 
 const Header = (props) => {
-  const handleAuth = () => {
-    auth
-      .singInWithPopup(provider)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-  };
+
+  // const handleAuth = () => {
+  //   auth.signInWithPopup(provider)
+  //     .then((result) => console.log(result))
+  //     .catch((error) => console.log(error.message));
+  // };
 
   return (
     <>
@@ -45,7 +41,8 @@ const Header = (props) => {
             <span>Series</span>
           </a>
         </NavMenu>
-        <Login onClick={handleAuth}>Login</Login>
+        {/* <Login onClick={handleAuth}>Login</Login> */}
+        <Login>Login</Login>
       </Nav>
     </>
   );

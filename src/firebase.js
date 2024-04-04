@@ -1,4 +1,4 @@
-import firebase from './firebase';
+import firebase from "./firebase";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD2ahsn7rcrY97xhjNl3tl21DkDW12ii90",
@@ -7,7 +7,7 @@ const firebaseConfig = {
   storageBucket: "disneyplus-clone-f1b31.appspot.com",
   messagingSenderId: "185167346573",
   appId: "1:185167346573:web:95373ed91e669707ec5bc4",
-  measurementId: "G-Q6RXYHRD1V",
+  measurementId: "G-Q6RXYHRD1V"
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
