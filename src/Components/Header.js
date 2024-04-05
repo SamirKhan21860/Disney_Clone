@@ -1,13 +1,35 @@
 import styled from "styled-components";
-// import { auth, provider } from "../firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import {
+  selectUserName,
+  selectUserPhoto,
+  setUserLoginDetails,
+} from "../features/user/userSlice";
+import { auth, provider } from "../firebase";
 
 const Header = (props) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const userName = useSelector(selectUserName);
+  const userPhoto = useSelector(selectUserPhoto);
 
-  // const handleAuth = () => {
-  //   auth.signInWithPopup(provider)
-  //     .then((result) => console.log(result))
-  //     .catch((error) => console.log(error.message));
-  // };
+  const handleAuth = () => {
+    auth
+      .signInWithPopup(provider)
+      .then((result) => console.log(result))
+      .catch((error) => console.log(error.message));
+  };
+
+  const setUser = (user) => {
+    dispatch(
+      setUserLoginDetails({
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+      })
+    );
+  };
 
   return (
     <>
@@ -15,34 +37,37 @@ const Header = (props) => {
         <Logo>
           <img src="/images/logo.svg" alt="Disney+ Logo" />
         </Logo>
-        <NavMenu>
-          <a href="/home">
-            <img src="/images/home-icon.svg" alt="home" />
-            <span>Home</span>
-          </a>
-          <a href="/search">
-            <img src="/images/search-icon.svg" alt="search" />
-            <span>Search</span>
-          </a>
-          <a href="/watchlist">
-            <img src="/images/watchlist-icon.svg" alt="watchlist" />
-            <span>Watchlist</span>
-          </a>
-          <a href="/originals">
-            <img src="/images/original-icon.svg" alt="original" />
-            <span>Originals</span>
-          </a>
-          <a href="/movies">
-            <img src="/images/movie-icon.svg" alt="movies" />
-            <span>Movies</span>
-          </a>
-          <a href="/series">
-            <img src="/images/series-icon.svg" alt="series" />
-            <span>Series</span>
-          </a>
-        </NavMenu>
-        {/* <Login onClick={handleAuth}>Login</Login> */}
-        <Login>Login</Login>
+        {!userName ? (<Login onClick={handleAuth}>Login</Login>) :
+        (<>
+          <NavMenu>
+            <a href="/home">
+              <img src="/images/home-icon.svg" alt="home" />
+              <span>Home</span>
+            </a>
+            <a href="/search">
+              <img src="/images/search-icon.svg" alt="search" />
+              <span>Search</span>
+            </a>
+            <a href="/watchlist">
+              <img src="/images/watchlist-icon.svg" alt="watchlist" />
+              <span>Watchlist</span>
+            </a>
+            <a href="/originals">
+              <img src="/images/original-icon.svg" alt="original" />
+              <span>Originals</span>
+            </a>
+            <a href="/movies">
+              <img src="/images/movie-icon.svg" alt="movies" />
+              <span>Movies</span>
+            </a>
+            <a href="/series">
+              <img src="/images/series-icon.svg" alt="series" />
+              <span>Series</span>
+            </a>
+          </NavMenu>
+        </>)}
+        <Login onClick={handleAuth}>Login</Login>
+        {/* <Login>Login</Login> */}
       </Nav>
     </>
   );
