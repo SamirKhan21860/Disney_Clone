@@ -15,6 +15,6 @@ const Container = styled.section`
   display: flex;
 `;
 
-const Content = styled.dive``;
+const Content = styled.div``;
 
 export default Login;
