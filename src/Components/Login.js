@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Login = () => {
+const Login = (props) => {
   return (
     <Container>
       <Content>
@@ -8,9 +8,9 @@ const Login = () => {
           <CTALogoOne src="/images/cta-logo-one.svg" alt="" />
           <SignUp>GET ALL THERE</SignUp>
           <Description>
-            Get Premier Access To Raya and the Last Dragon for an additional
-            free with a Disney+ subscription. As of 03/26/21, the price of
-            Disney+ and The Disney Bundle will increase by $1.
+            Get Premier Access to Raya and the Last Dragon for an additional fee
+            with a Disney+ subscription. As of 03/26/21, the price of Disney+
+            and The Disney Bundle will increase by $1.
           </Description>
           <CTALogoTwo src="/images/cta-logo-two.png" alt="" />
         </CTA>
@@ -46,8 +46,10 @@ const BgImage = styled.div`
   height: 100%;
   background-position: top;
   background-size: cover;
+  background-repeat: no-repeat;
   background-image: url("/images/login-background.jpg");
   position: absolute;
+  top: 0;
   right: 0;
   left: 0;
   z-index: -1;
@@ -79,13 +81,14 @@ const SignUp = styled.a`
   padding: 16.5px 0;
   border: 1px solid transparent;
   border-radius: 4px;
+
   &:hover {
     background-color: #0483ee;
   }
 `;
 
 const Description = styled.p`
-  color: hsla(0, 01, 95.3%, 1);
+  color: hsla(0, 0%, 95.3%, 1);
   font-size: 11px;
   margin: 0 0 24px;
   line-height: 1.5;

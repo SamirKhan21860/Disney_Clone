@@ -1,23 +1,23 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { auth, provider } from "../firebase";
 import {
   selectUserName,
   selectUserPhoto,
-  setSignOutState,
   setUserLoginDetails,
+  setSignOutState,
 } from "../features/user/userSlice";
-import { auth, provider } from "../firebase";
-import { useEffect } from "react";
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const history = useHistory();
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
 
   useEffect(() => {
-    auth.onAuthStateChange(async (user) => {
+    auth.onAuthStateChanged(async (user) => {
       if (user) {
         setUser(user);
         history.push("/home");
@@ -29,18 +29,23 @@ const Header = (props) => {
     if (!userName) {
       auth
         .signInWithPopup(provider)
-        .then((result) => console.log(result))
-        .catch((error) => console.log(error.message));
+        .then((result) => {
+          setUser(result.user);
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
     } else if (userName) {
       auth
-        .singOut()
+        .signOut()
         .then(() => {
           dispatch(setSignOutState());
           history.push("/");
         })
-        .catch((error) => alert(error.message));
+        .catch((err) => alert(err.message));
     }
   };
+
   const setUser = (user) => {
     dispatch(
       setUserLoginDetails({
@@ -52,67 +57,64 @@ const Header = (props) => {
   };
 
   return (
-    <>
-      <Nav>
-        <Logo>
-          <img src="/images/logo.svg" alt="Disney+ Logo" />
-        </Logo>
-        {!userName ? (
-          <Login onClick={handleAuth}>Login</Login>
-        ) : (
-          <>
-            <NavMenu>
-              <a href="/home">
-                <img src="/images/home-icon.svg" alt="home" />
-                <span>Home</span>
-              </a>
-              <a href="/search">
-                <img src="/images/search-icon.svg" alt="search" />
-                <span>Search</span>
-              </a>
-              <a href="/watchlist">
-                <img src="/images/watchlist-icon.svg" alt="watchlist" />
-                <span>Watchlist</span>
-              </a>
-              <a href="/originals">
-                <img src="/images/original-icon.svg" alt="original" />
-                <span>Originals</span>
-              </a>
-              <a href="/movies">
-                <img src="/images/movie-icon.svg" alt="movies" />
-                <span>Movies</span>
-              </a>
-              <a href="/series">
-                <img src="/images/series-icon.svg" alt="series" />
-                <span>Series</span>
-              </a>
-            </NavMenu>
-            <SignOut>
-              <UserImg src={userPhoto} alt={userName} />
-              <DropDown>
-                <span onClick={handleAuth}>Sign out</span>
-              </DropDown>
-            </SignOut>
-          </>
-        )}
+    <Nav>
+      <Logo>
+        <img src="/images/logo.svg" alt="Disney+" />
+      </Logo>
+
+      {!userName ? (
         <Login onClick={handleAuth}>Login</Login>
-        {/* <Login>Login</Login> */}
-      </Nav>
-    </>
+      ) : (
+        <>
+          <NavMenu>
+            <a href="/home">
+              <img src="/images/home-icon.svg" alt="HOME" />
+              <span>HOME</span>
+            </a>
+            <a>
+              <img src="/images/search-icon.svg" alt="SEARCH" />
+              <span>SEARCH</span>
+            </a>
+            <a>
+              <img src="/images/watchlist-icon.svg" alt="WATCHLIST" />
+              <span>WATCHLIST</span>
+            </a>
+            <a>
+              <img src="/images/original-icon.svg" alt="ORIGINALS" />
+              <span>ORIGINALS</span>
+            </a>
+            <a>
+              <img src="/images/movie-icon.svg" alt="MOVIES" />
+              <span>MOVIES</span>
+            </a>
+            <a>
+              <img src="/images/series-icon.svg" alt="SERIES" />
+              <span>SERIES</span>
+            </a>
+          </NavMenu>
+          <SignOut>
+            <UserImg src={userPhoto} alt={userName} />
+            <DropDown>
+              <span onClick={handleAuth}>Sign out</span>
+            </DropDown>
+          </SignOut>
+        </>
+      )}
+    </Nav>
   );
 };
 
 const Nav = styled.nav`
-  display: flex;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 70px;
   background-color: #090b13;
-  padding: 0 36px;
-  align-items: center;
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 0 36px;
   letter-spacing: 16px;
   z-index: 3;
 `;
@@ -121,6 +123,7 @@ const Logo = styled.a`
   padding: 0;
   width: 80px;
   margin-top: 4px;
+  max-height: 70px;
   font-size: 0;
   display: inline-block;
 
@@ -141,7 +144,6 @@ const NavMenu = styled.div`
   position: relative;
   margin-right: auto;
   margin-left: 25px;
-  text-transform: uppercase;
 
   a {
     display: flex;
@@ -170,9 +172,9 @@ const NavMenu = styled.div`
         bottom: -6px;
         content: "";
         height: 2px;
+        left: 0px;
         opacity: 0;
         position: absolute;
-        left: 0px;
         right: 0px;
         transform-origin: left center;
         transform: scaleX(0);
@@ -191,9 +193,9 @@ const NavMenu = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     display: none;
-  }
+  } */
 `;
 
 const Login = styled.a`
@@ -206,8 +208,8 @@ const Login = styled.a`
   transition: all 0.2s ease 0s;
 
   &:hover {
-    background-color: rgba(249, 249, 249, 1);
-    color: rgba(0, 0, 0, 1);
+    background-color: #f9f9f9;
+    color: #000;
     border-color: transparent;
   }
 `;
@@ -218,9 +220,10 @@ const UserImg = styled.img`
 
 const DropDown = styled.div`
   position: absolute;
-  top: 4px;
+  top: 48px;
   right: 0px;
   background: rgb(19, 19, 19);
+  border: 1px solid rgba(151, 151, 151, 0.34);
   border-radius: 4px;
   box-shadow: rgb(0 0 0 / 50%) 0px 0px 18px 0px;
   padding: 10px;
