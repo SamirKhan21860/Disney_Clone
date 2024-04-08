@@ -1,58 +1,19 @@
 {
-  "name": "disney_clone",
-  "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "firebase": "^10.6.0",
-    "firebase-tools": "^13.6.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
-    "react-router-dom": "^6.22.3",
-    "react-scripts": "^3.0.1",
-    "react-slick": "^0.30.2",
-    "slick-carousel": "^1.8.1",
-    "styled-components": "^6.1.8",
-    "web-vitals": "^2.1.4"
+    "styled-components": "^6.1.8"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "webpack": "^5.91.0"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "name": "disney_clone",
+  "version": "1.0.0",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "disney_clone"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "chokidar": "^3.6.0",
-    "webpack": "^4.42.0"
-  }
+  "license": "ISC"
 }
